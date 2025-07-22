@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - FakeStore API</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛒 Shopping Cart</h1>
+            <p>Cart ID: 2</p>
+        </header>
+        
+        <main>
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <p>Loading cart items...</p>
+            </div>
+            
+            <div id="error" class="error hidden">
+                <p>❌ Failed to load cart data. Please try again.</p>
+                <button id="retry-btn" class="retry-btn">Retry</button>
+            </div>
+            
+            <div id="cart-container" class="cart-container hidden">
+                <div class="cart-header">
+                    <h2>Cart Items</h2>
+                    <div id="cart-info" class="cart-info"></div>
+                </div>
+                <div id="products-grid" class="products-grid"></div>
+                <div class="cart-summary">
+                    <div id="total-amount" class="total-amount"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
