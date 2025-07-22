@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FakeStore Cart Viewer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .product {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 0 8px #eee;
+    }
+    .product img {
+      width: 100px;
+      height: auto;
+    }
+    .product-title {
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .product-price {
+      color: green;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>🛒 Cart Products</h1>
+  <div id="cart-products">Loading...</div>
+
+  <script>
+    async function fetchCartProducts() {
+      const cartContainer = document.getElementById('cart-products');
+      try {
+        const cartResponse = await fetch('https://fakestoreapi.com/carts/2');
+        const cartData = await cartResponse.json();
+        const products = cartData.products;
+
+        if (!products || products.length === 0) {
+          cartContainer.innerHTML = "<p>No products found in cart.</p>";
+          return;
+        }
+
+        const productHTML = await Promise.all(
+          products.map(async (product) => {
+            const res = await fetch(`https://fakestoreapi.com/products/${product.productId}`);
+            const data = await res.json();
+
+            return `
+              <div class="product">
+                <img src="${data.image}" alt="${data.title}" />
+                <div>
+                  <div class="product-title">${data.title}</div>
+                  <div class="product-price">$${data.price}</div>
+                  <div>Quantity: ${product.quantity}</div>
+                </div>
+              </div>
+            `;
+          })
+        );
+
+        cartContainer.innerHTML = productHTML.join('');
+      } catch (error) {
+        cartContainer.innerHTML = `<p>Error fetching data: ${error.message}</p>`;
+      }
+    }
+
+    fetchCartProducts();
+  </script>
+</body>
+</html>
