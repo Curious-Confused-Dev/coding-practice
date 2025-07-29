@@ -1,0 +1,9 @@
+div {
+  position: static;
+}
+
+body{
+    position: relative;
+    top: 10px;
+    left: 50px;
+}
