@@ -13,3 +13,35 @@ body > div {
     top: 20px;
     left: 30px;
 }
+
+div {
+  position: static;
+}
+
+body{
+    position: relative;
+    top: 10px;
+    left: 50px;
+}
+
+body > div {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+}
+
+div {
+  position: static;
+}
+
+body{
+    position: relative;
+    top: 10px;
+    left: 50px;
+}
+
+body > div {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+}
